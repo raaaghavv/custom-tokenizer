@@ -1,115 +1,110 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import { useState, useEffect } from "react";
+// Assuming these functions exist and work in your project
+import { encode, tokenizeWithSpecials } from "../lib/tokenizer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// Helper function for coloring tokens
+const getColor = (index) => {
+  return `hsl(${(index * 40) % 360}, 95%, 85%)`;
+};
 
 export default function Home() {
+  const [input, setInput] = useState("This is a sample text to be tokenized.");
+  const [tokens, setTokens] = useState([]);
+  const [ids, setIds] = useState([]);
+  const [showWhitespace, setShowWhitespace] = useState(false);
+
+  // Tokenization runs automatically whenever the input changes
+  useEffect(() => {
+    const toks = tokenizeWithSpecials(input);
+    const tokenIds = encode(input);
+    setTokens(toks);
+    setIds(tokenIds);
+  }, [input]);
+
+  const renderToken = (token) => {
+    if (showWhitespace) {
+      // Replace spaces with a middle dot for visibility
+      return token.replace(/ /g, "·");
+    }
+    return token;
+  };
+
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/pages/index.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+    // STEP 1: Add flex, flex-col, and min-h-screen here
+    <main className="flex flex-col min-h-screen p-4 sm:p-6 lg:p-8 bg-white text-gray-800">
+      {/* STEP 2: Add flex-grow to a new wrapper div around your main content */}
+      <div className="flex-grow max-w-5xl mx-auto w-full">
+        <header className="flex justify-start items-center mb-6">
+          <h1 className="text-3xl font-bold text-gray-900">Tiktokenizer</h1>
+        </header>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* --- Left Column --- */}
+          <div className="flex flex-col gap-4">
+            <p className="text-sm text-gray-600">
+              Type text below to see it tokenized in real-time.
+            </p>
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type your text here..."
+              className="w-full h-64 p-3 font-mono text-sm bg-gray-50 border border-gray-300 rounded-md resize-y focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+
+          {/* --- Right Column --- */}
+          <div className="flex flex-col gap-4">
+            <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+              <h3 className="font-semibold text-gray-600">Token count</h3>
+              <p className="text-3xl font-bold text-gray-900">{ids.length}</p>
+            </div>
+
+            <div className="border border-gray-200 rounded-lg p-4 bg-gray-50 min-h-[120px]">
+              <div className="flex flex-wrap gap-1">
+                {tokens.map((tok, idx) => (
+                  <span
+                    key={idx}
+                    className="px-1.5 py-0.5 rounded-md text-black"
+                    style={{ backgroundColor: getColor(idx) }}
+                  >
+                    {renderToken(tok)}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="border border-gray-200 rounded-lg p-4 bg-gray-50 font-mono text-sm text-gray-700 break-words min-h-[120px]">
+              {ids.join(", ")}
+            </div>
+
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="whitespace"
+                checked={showWhitespace}
+                onChange={(e) => setShowWhitespace(e.target.checked)}
+                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <label
+                htmlFor="whitespace"
+                className="ml-2 block text-sm text-gray-800"
+              >
+                Show whitespace
+              </label>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+      </div>{" "}
+      {/* End of the new flex-grow wrapper */}
+      <footer className="text-center mt-8 pt-4 border-t border-gray-200 text-sm text-gray-500">
+        Built by{" "}
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="https://www.github.com/raaaghavv"
+          className="text-blue-600 hover:underline"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
+          raghav
         </a>
       </footer>
-    </div>
+    </main>
   );
 }
