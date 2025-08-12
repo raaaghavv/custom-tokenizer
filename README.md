@@ -2,17 +2,11 @@
 
 A clean, lightweight, and real-time web tool to visualize how text is tokenized by Large Language Models. Inspired by the TikTokenizer, this application provides immediate feedback on token counts, string representations, and numerical IDs.
 
-<!-- --- -->
-
 ## [Live Demo](https://tokenization-visualizer.vercel.app/)
-
-<!-- --- -->
 
 ## Screenshot
 
-![A screenshot of the Custom Tokenizer application showing text being tokenized in real-time.](public\screenshotTokenizer.png)
-
-<!-- --- -->
+![A screenshot of the Custom Tokenizer application showing text being tokenized in real-time.](public/screenshotTokenizer.png)
 
 ## Features
 
@@ -22,16 +16,12 @@ A clean, lightweight, and real-time web tool to visualize how text is tokenized 
 - **Clean & Responsive UI:** A modern, light-themed interface built for clarity and ease of use on any device.
 - **Lightweight & Fast:** Built with Next.js for a fast, optimized user experience.
 
-<!-- --- -->
-
 ## Tech Stack
 
 - **Framework:** [Next.js](https://nextjs.org/)
 - **UI Library:** [React](https://reactjs.org/)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **Deployment:** [Vercel](https://vercel.com/)
-
-<!-- --- -->
 
 ## Getting Started
 
@@ -76,8 +66,6 @@ Ensure you have Node.js (version 18.x or later) and a package manager (npm, yarn
 
 5.  **Open your browser** and navigate to `http://localhost:3000` to see the application running.
 
-<!-- --- -->
-
 ## How to Use
 
 1.  Simply start typing or paste text into the main text area on the left.
@@ -86,8 +74,6 @@ Ensure you have Node.js (version 18.x or later) and a package manager (npm, yarn
     - **Colored Tokens:** Displays each token as a distinctly colored block.
     - **Token IDs:** Lists the numerical ID for each token, separated by commas.
 3.  Check the **"Show whitespace"** box at the bottom of the right column to make space characters visible within the colored token blocks.
-
-<!-- --- -->
 
 ## Acknowledgements
 
