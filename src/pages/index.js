@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-// Assuming these functions exist and work in your project
 import { encode, tokenizeWithSpecials } from "../lib/tokenizer";
 
-// Helper function for coloring tokens
+// function for randomly coloring tokens
 const getColor = (index) => {
   return `hsl(${(index * 40) % 360}, 95%, 85%)`;
 };
@@ -13,7 +12,7 @@ export default function Home() {
   const [ids, setIds] = useState([]);
   const [showWhitespace, setShowWhitespace] = useState(false);
 
-  // Tokenization runs automatically whenever the input changes
+  // Tokenization runs whenever the input changes
   useEffect(() => {
     const toks = tokenizeWithSpecials(input);
     const tokenIds = encode(input);
@@ -30,16 +29,18 @@ export default function Home() {
   };
 
   return (
-    // STEP 1: Add flex, flex-col, and min-h-screen here
     <main className="flex flex-col min-h-screen p-4 sm:p-6 lg:p-8 bg-white text-gray-800">
-      {/* STEP 2: Add flex-grow to a new wrapper div around your main content */}
       <div className="flex-grow max-w-5xl mx-auto w-full">
+        
+        {/* header */}
         <header className="flex justify-start items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">Tiktokenizer</h1>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Tokenization Visualizer
+          </h1>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* --- Left Column --- */}
+          {/* 1st column */}
           <div className="flex flex-col gap-4">
             <p className="text-sm text-gray-600">
               Type text below to see it tokenized in real-time.
@@ -52,13 +53,15 @@ export default function Home() {
             />
           </div>
 
-          {/* --- Right Column --- */}
+          {/* 2nd column */}
           <div className="flex flex-col gap-4">
+            {/* token count display */}
             <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
               <h3 className="font-semibold text-gray-600">Token count</h3>
               <p className="text-3xl font-bold text-gray-900">{ids.length}</p>
             </div>
 
+            {/* tokens display */}
             <div className="border border-gray-200 rounded-lg p-4 bg-gray-50 min-h-[120px]">
               <div className="flex flex-wrap gap-1">
                 {tokens.map((tok, idx) => (
@@ -73,10 +76,12 @@ export default function Home() {
               </div>
             </div>
 
+            {/* encoded tokens */}
             <div className="border border-gray-200 rounded-lg p-4 bg-gray-50 font-mono text-sm text-gray-700 break-words min-h-[120px]">
               {ids.join(", ")}
             </div>
 
+            {/* show whitespaces toggle */}
             <div className="flex items-center">
               <input
                 type="checkbox"
@@ -94,15 +99,16 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>{" "}
-      {/* End of the new flex-grow wrapper */}
+      </div>
+
+      {/* footer */}
       <footer className="text-center mt-8 pt-4 border-t border-gray-200 text-sm text-gray-500">
         Built by{" "}
         <a
           href="https://www.github.com/raaaghavv"
           className="text-blue-600 hover:underline"
         >
-          raghav
+          raaaghavv
         </a>
       </footer>
     </main>

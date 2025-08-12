@@ -1,40 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Custom-Tokenization-Visualizer
+
+A clean, lightweight, and real-time web tool to visualize how text is tokenized by Large Language Models. Inspired by the TikTokenizer, this application provides immediate feedback on token counts, string representations, and numerical IDs.
+
+<!-- --- -->
+
+## [Live Demo](https://tokenization-visualizer.vercel.app/)
+
+<!-- --- -->
+
+## Screenshot
+
+![A screenshot of the Custom Tokenizer application showing text being tokenized in real-time.](public\screenshotTokenizer.png)
+
+<!-- --- -->
+
+## Features
+
+- **Real-Time Tokenization:** Input text is tokenized instantly as you type.
+- **Comprehensive Visualization:** Displays the total token count, color-coded token strings, and their corresponding numerical IDs.
+- **Whitespace Toggle:** An option to visualize whitespace characters (represented by `·`) for more granular analysis.
+- **Clean & Responsive UI:** A modern, light-themed interface built for clarity and ease of use on any device.
+- **Lightweight & Fast:** Built with Next.js for a fast, optimized user experience.
+
+<!-- --- -->
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/)
+- **UI Library:** [React](https://reactjs.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Deployment:** [Vercel](https://vercel.com/)
+
+<!-- --- -->
 
 ## Getting Started
 
-First, run the development server:
+To get a local copy up and running, follow these simple steps.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ensure you have Node.js (version 18.x or later) and a package manager (npm, yarn, or pnpm) installed.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Installation
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1.  **Clone the repository:**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+    ```bash
+    git clone [https://github.com/your-username/custom-tokenizer.git](https://github.com/your-username/custom-tokenizer.git)
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2.  **Navigate to the project directory:**
 
-## Learn More
+    ```bash
+    cd custom-tokenizer
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+3.  **Install dependencies:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+    ```bash
+    # Using npm
+    npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    # Or using yarn
+    yarn install
 
-## Deploy on Vercel
+    # Or using pnpm
+    pnpm install
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4.  **Run the development server:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+    ```bash
+    npm run dev
+    ```
+
+5.  **Open your browser** and navigate to `http://localhost:3000` to see the application running.
+
+<!-- --- -->
+
+## How to Use
+
+1.  Simply start typing or paste text into the main text area on the left.
+2.  The three panels on the right will update in real-time:
+    - **Token count:** Shows the total number of tokens generated from your input.
+    - **Colored Tokens:** Displays each token as a distinctly colored block.
+    - **Token IDs:** Lists the numerical ID for each token, separated by commas.
+3.  Check the **"Show whitespace"** box at the bottom of the right column to make space characters visible within the colored token blocks.
+
+<!-- --- -->
+
+## Acknowledgements
+
+Inspired by the [tiktokenizer](https://tiktokenizer.vercel.app/).

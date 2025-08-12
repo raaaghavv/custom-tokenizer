@@ -8,6 +8,7 @@ export let tokenToId = {
   ",": 6,
 };
 
+// reverse [key:value] Object for quicker decoding
 export let idToToken = Object.fromEntries(
   Object.entries(tokenToId).map(([token, id]) => [id, token])
 );

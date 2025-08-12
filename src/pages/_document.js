@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Custom Tokenizer</title>
+        <title>Tokenization Visualizer</title>
       </Head>
       <body className="antialiased">
         <Main />
