@@ -29,9 +29,8 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col min-h-screen p-4 sm:p-6 lg:p-8 bg-white text-gray-800">
+    <main className="flex flex-col min-h-screen p-4 sm:py-6 lg:py-8 bg-white text-gray-800">
       <div className="flex-grow max-w-5xl mx-auto w-full">
-        
         {/* header */}
         <header className="flex justify-start items-center mb-6">
           <h1 className="text-3xl font-bold text-gray-900">
@@ -42,7 +41,7 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* 1st column */}
           <div className="flex flex-col gap-4">
-            <p className="text-sm text-gray-600">
+            <p className="text-md text-gray-600">
               Type text below to see it tokenized in real-time.
             </p>
             <textarea
@@ -63,7 +62,10 @@ export default function Home() {
 
             {/* tokens display */}
             <div className="border border-gray-200 rounded-lg p-4 bg-gray-50 min-h-[120px]">
-              <div className="flex flex-wrap gap-1">
+              <h3 className="block font-semibold text-gray-600 mb-1">
+                Generated Tokens
+              </h3>
+              <div className="flex flex-wrap gap-1.5">
                 {tokens.map((tok, idx) => (
                   <span
                     key={idx}
@@ -77,8 +79,11 @@ export default function Home() {
             </div>
 
             {/* encoded tokens */}
-            <div className="border border-gray-200 rounded-lg p-4 bg-gray-50 font-mono text-sm text-gray-700 break-words min-h-[120px]">
-              {ids.join(", ")}
+            <div className="border border-gray-200 rounded-lg p-4 bg-gray-50 break-words min-h-[120px]">
+              <h3 className="font-semibold text-gray-600">Encoded Tokens</h3>
+              <span className="font-mono text-sm text-gray-700">
+                {ids.join(", ")}
+              </span>
             </div>
 
             {/* show whitespaces toggle */}
